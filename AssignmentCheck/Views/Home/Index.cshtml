@@ -1,0 +1,32 @@
+﻿
+@model AssignmentCheck.Models.AssignmentResult
+@{
+    ViewBag.Title = "Index";
+}
+<h2>@ViewBag.User</h2>
+<h2>View</h2>
+
+<table>
+    <thead>Test For @Model.Title for user @Model.UserName </thead>
+    <tr>
+        <th>Type Of Check</th>
+        <th>Description</th>
+        <th>Result</th>
+    </tr>
+
+@foreach(AssignmentCheck.Models.CriterionResult result in Model.Results)
+{
+    <tr>
+        <td>
+        @result.Description
+        </td>
+        <td>
+        @result.Message
+        </td>
+        <td>
+        @result.Result
+        </td>
+    </tr>
+}
+
+</table>
