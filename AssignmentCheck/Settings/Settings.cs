@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using AssignmentCheck.Properties;
 using AssignmentCheck.Settings;
-using AssignmentCheck.Models;
 
 namespace AssignmentCheck.Properties
 {

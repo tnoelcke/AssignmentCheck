@@ -1,32 +1,32 @@
-﻿
-@model AssignmentCheck.Models.AssignmentResult
+﻿@model AssignmentCheck.Models.AssignmentResultsViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "BA 272 Assignment Checker";
 }
-<h2>@ViewBag.User</h2>
-<h2>View</h2>
-
-<table>
-    <thead>Test For @Model.Title for user @Model.UserName </thead>
-    <tr>
-        <th>Type Of Check</th>
-        <th>Description</th>
-        <th>Result</th>
-    </tr>
-
-@foreach(AssignmentCheck.Models.CriterionResult result in Model.Results)
-{
-    <tr>
-        <td>
-        @result.Description
-        </td>
-        <td>
-        @result.Message
-        </td>
-        <td>
-        @result.Result
-        </td>
-    </tr>
-}
-
-</table>
+<div class="page-header">
+    <h1>
+        Welcome to the BA 272 Assignment Checker!
+        <small>Assignments for @Html.DisplayFor(m => m.UserName)</small>
+    </h1>
+</div>
+<div class="list-group">
+    @foreach (var result in Model.Results)
+    {
+        <div class="list-group-item @(result.AreAllValid ? "list-group-item-success" : "list-group-item-danger")">
+            <h3 class="list-group-item-heading">
+                @Html.DisplayFor(m => result.Title)
+                <span class="badge">@(result.ValidCount + "/" + result.CriteriaCount)</span>
+            </h3>
+            <div class="list-group">
+                @foreach (var criterion in result.Results)
+                {
+                    <div class="list-group-item @(criterion.IsValid ? "list-group-item-success" : "list-group-item-danger")">
+                        <h4 class="list-group-item-heading">@Html.DisplayFor(m => criterion.Description)</h4>
+                        <p class="list-group-item-text">
+                            @Html.DisplayFor(m => criterion.Message)
+                        </p>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
