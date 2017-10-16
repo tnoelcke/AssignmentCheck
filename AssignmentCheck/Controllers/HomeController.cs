@@ -1,9 +1,11 @@
-﻿using AssignmentCheck.Models;
+﻿using AssignmentCheck.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AssignmentCheck.Extensions;
+using AssignmentCheck.Models;
 
 namespace AssignmentCheck.Controllers
 {
@@ -14,24 +16,22 @@ namespace AssignmentCheck.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-
+            //gets the root path to the class folder structure
             string path = AssignmentCheck.Properties.Settings.Default.RootPath;
-            List<Assignment> Assignments = AssignmentCheck.Properties.Settings.Default.Assignments;
-            AssignmentsResults assignmentResults = new AssignmentsResults();
-            string userName = User.Identity.Name;
-            char[] seperator = { '\\' };
-            userName = userName.Split('\\')[1];
-            path += "\\" + userName;
-            assignmentResults.UserName = userName;
-            foreach(Assignment toCheck in Assignments)
+            //gets the configured assignment criteria that do the validation of the folders.
+            List<Assignment> assignments = AssignmentCheck.Properties.Settings.Default.Assignments;
+            //get the username for the logged in user then add it to the folder path to complete the path to
+            //the current logged on user's class folder
+            string userName = User.Identity.Name.RemoveDomainFromIdentity();
+            path = System.IO.Path.Combine(path, userName);
+            //turn the settings into results in the model
+            AssignmentResultsViewModel model = new AssignmentResultsViewModel()
             {
-                AssignmentResult Checked = new AssignmentResult();
-                Checked.Results = toCheck.CheckCriterion(path);
-                Checked.Title = toCheck.Title;
-                assignmentResults.Results.Add(Checked);
-            }
-            //return View("Index", test);
-            throw new NotImplementedException();
+                UserName = userName,
+                Results = assignments.Select(a => a.Validate(path))
+            };
+            
+            return View(model);
         }
     }
 }
