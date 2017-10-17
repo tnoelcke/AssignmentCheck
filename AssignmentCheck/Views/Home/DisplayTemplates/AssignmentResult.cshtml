@@ -1,0 +1,19 @@
+﻿@model AssignmentCheck.Settings.AssignmentResult
+
+<div class="list-group-item @(Model.AreAllValid ? "list-group-item-success" : "list-group-item-danger")">
+    <h3 class="list-group-item-heading">
+        @Html.DisplayFor(m => Model.Title)
+        <span class="badge">@(Model.ValidCount + "/" + Model.CriteriaCount)</span>
+    </h3>
+    <div class="list-group">
+        @foreach (var criterion in Model.Results)
+        {
+            <div class="list-group-item @(criterion.IsValid ? "list-group-item-success" : "list-group-item-danger")">
+                <h4 class="list-group-item-heading">@Html.DisplayFor(m => criterion.Description)</h4>
+                <p class="list-group-item-text">
+                    @Html.DisplayFor(m => criterion.Message)
+                </p>
+            </div>
+        }
+    </div>
+</div>

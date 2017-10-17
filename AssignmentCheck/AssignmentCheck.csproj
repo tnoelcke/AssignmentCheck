@@ -121,6 +121,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\AssignmentResultsViewModel.cs" />
     <Compile Include="Settings\AssignmentResult.cs" />
     <Compile Include="Settings\Criterion.cs" />
@@ -152,6 +153,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
+    <Content Include="Views\Home\DisplayTemplates\AssignmentResult.cshtml" />
+    <Content Include="Views\Home\Admin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
