@@ -1,0 +1,21 @@
+﻿@model AssignmentCheck.Models.AdminViewModel
+
+@{
+    ViewBag.Title = "BA 272 Assignment Checker";
+}
+<div class="page-header">
+    <h1>
+        Welcome to the BA 272 Assignment Checker!
+    </h1>
+</div>
+<div class="list-group">
+    @foreach (var result in Model.Results)
+    {
+        <div class="list-group-item">
+            <h4 class="list-group-item-heading">
+                @Html.DisplayFor(m => result.Item1)
+            </h4>
+        </div>
+        @Html.DisplayFor(m => result.Item2)
+    }
+</div>
