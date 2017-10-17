@@ -11,22 +11,6 @@
 <div class="list-group">
     @foreach (var result in Model.Results)
     {
-        <div class="list-group-item @(result.AreAllValid ? "list-group-item-success" : "list-group-item-danger")">
-            <h3 class="list-group-item-heading">
-                @Html.DisplayFor(m => result.Title)
-                <span class="badge">@(result.ValidCount + "/" + result.CriteriaCount)</span>
-            </h3>
-            <div class="list-group">
-                @foreach (var criterion in result.Results)
-                {
-                    <div class="list-group-item @(criterion.IsValid ? "list-group-item-success" : "list-group-item-danger")">
-                        <h4 class="list-group-item-heading">@Html.DisplayFor(m => criterion.Description)</h4>
-                        <p class="list-group-item-text">
-                            @Html.DisplayFor(m => criterion.Message)
-                        </p>
-                    </div>
-                }
-            </div>
-        </div>
+        @Html.DisplayFor(m => result)
     }
 </div>
