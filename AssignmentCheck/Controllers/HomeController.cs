@@ -35,6 +35,7 @@ namespace AssignmentCheck.Controllers
             return View(model);
         }
 
+        //Get: Admin/{id}
         public ActionResult Admin(int id)
         {
             //gets the root path to the class folder structure
@@ -59,6 +60,48 @@ namespace AssignmentCheck.Controllers
                 Results = paths.Select(p => new Tuple<string, AssignmentResult>(p, target.Validate(p)))
             };
 
+            //by default this view will only return the invalid results.
+            model.Results.ToList().RemoveAll(p => p.Item2.AreAllValid);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Filer(int id, bool showValid)
+        {
+            //gets the rot path to the class folder structur.
+            string path = AssignmentCheck.Properties.Settings.Default.RootPath;
+            //get the configured assignment criteria that do the validation of the folders.
+            List<Assignment> assignments = AssignmentCheck.Properties.Settings.Default.Assignments;
+            Assignment target = null;
+            //get the assignment based on the id.
+            if(id < 1 || id > assignments.Count)
+            {
+                return new HttpNotFoundResult();
+            }
+            else
+            {
+                target = assignments[id - 1];
+            }
+            string[] paths = Directory.GetDirectories(path);
+            AdminViewModel model;
+            //Now lets filter the results if they need to be filtered otherwise just get all the results
+            if (showValid)
+            {
+                model = new AdminViewModel()
+                {
+                    Results = paths.Select(p => new Tuple<string, AssignmentResult>(p, target.Validate(p)))
+                };
+            }
+            else
+            {
+                model = new AdminViewModel()
+                {
+                    Results = paths.Select(p => new Tuple<string, AssignmentResult>(p, target.Validate(p)))
+                };
+                //remove all valid results.
+                model.Results.ToList().RemoveAll(x => x.Item2.AreAllValid); 
+            }
             return View(model);
         }
     }
