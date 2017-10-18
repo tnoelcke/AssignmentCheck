@@ -8,7 +8,12 @@
         Welcome to the BA 272 Assignment Checker!
     </h1>
 </div>
-<div class="list-group">
+
+<div class="dropdown">
+    @Html.DropDownList("Results Filter", new SelectList(new List<string>(){"Show Invalid Results Only", "Show All Results" }, new { onchange = "filter()" }))
+</div>
+
+<div class="list-group" id="results">
     @foreach (var result in Model.Results)
     {
         <div class="list-group-item">

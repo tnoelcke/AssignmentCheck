@@ -61,13 +61,16 @@ namespace AssignmentCheck.Controllers
             };
 
             //by default this view will only return the invalid results.
-            model.Results.ToList().RemoveAll(p => p.Item2.AreAllValid);
+            //remove the valid results from the list.
+            List<Tuple<string, AssignmentResult>> modifiedResults = model.Results.ToList();
+            modifiedResults.RemoveAll(p => p.Item2.AreAllValid == true);
+            model.Results = modifiedResults;
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Filer(int id, bool showValid)
+        public ActionResult Admin(int id, bool showValid)
         {
             //gets the rot path to the class folder structur.
             string path = AssignmentCheck.Properties.Settings.Default.RootPath;
@@ -100,7 +103,9 @@ namespace AssignmentCheck.Controllers
                     Results = paths.Select(p => new Tuple<string, AssignmentResult>(p, target.Validate(p)))
                 };
                 //remove all valid results.
-                model.Results.ToList().RemoveAll(x => x.Item2.AreAllValid); 
+                List<Tuple<string, AssignmentResult>> modifiedResults = model.Results.ToList();
+                modifiedResults.RemoveAll(x => x.Item2.AreAllValid);
+                model.Results = modifiedResults;
             }
             return View(model);
         }
