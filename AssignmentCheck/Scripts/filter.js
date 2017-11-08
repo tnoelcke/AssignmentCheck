@@ -5,12 +5,12 @@ function filter() {
     //get the value of the filter from the dom.
     let result = document.getElementById("Results_Filter");
     let resultText = result.Value;
-    var showValid;
+    let showValid;
     //set up for our HTTP post later
-    if (resultText === "Show All") {
-        let showValid = true;
+    if (resultText === "Show All Results") {
+        showValid = true;
     } else {
-        let showValid = false;
+        showValid = false;
     }
 
     //get our URL todo an HTTP Post Later. add the paramater that states weather or not to show
@@ -26,9 +26,10 @@ function filter() {
     //handles the data once we get it back.
     xhr.onreadystatechange = function (data) {
         //finds the olds results and removes them.
+        let parent = document.getElementById("results");
         let results = document.getElementsByClassName("list-group-item");
         for (var i = 0; i < results.length; i++) {
-            results[i].remove();
+            parent.removeChild(results[i]);
         }
 
         //add the filtered results to the dom.
@@ -40,5 +41,5 @@ function filter() {
         console.log(e);
     }
 
-
+    xhr.send();
 }
