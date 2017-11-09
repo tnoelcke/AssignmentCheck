@@ -156,6 +156,7 @@
     <Content Include="Scripts\jquery-3.2.1.min.map" />
     <Content Include="Views\Home\DisplayTemplates\AssignmentResult.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
+    <Content Include="Views\partialViews\_AssignmentPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

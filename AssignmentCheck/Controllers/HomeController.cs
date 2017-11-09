@@ -70,6 +70,7 @@ namespace AssignmentCheck.Controllers
         }
 
         [HttpPost]
+        [Route("Home/Admin/{id}/{bool}", Order = 1)]
         public ActionResult Admin(int id, bool showValid)
         {
             //gets the rot path to the class folder structur.
@@ -107,7 +108,7 @@ namespace AssignmentCheck.Controllers
                 modifiedResults.RemoveAll(x => x.Item2.AreAllValid);
                 model.Results = modifiedResults;
             }
-            return View(model);
+            return PartialView("Views/partialViews/_AssignmentPartial.cshtml", model);
         }
     }
 }
