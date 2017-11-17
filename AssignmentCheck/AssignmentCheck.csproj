@@ -104,7 +104,6 @@
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\filter.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.js" />
@@ -116,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Extensions\DirectoryExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -154,9 +154,10 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
-    <Content Include="Views\Home\DisplayTemplates\AssignmentResult.cshtml" />
-    <Content Include="Views\Home\Admin.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\AssignmentResult.cshtml" />
+    <Content Include="Views\Admin\List.cshtml" />
     <Content Include="Views\partialViews\_AssignmentPartial.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

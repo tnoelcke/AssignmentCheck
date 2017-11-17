@@ -1,0 +1,26 @@
+﻿@model List<Tuple<int, string>>
+@{
+    ViewBag.Title = "BA 272 Assignment Checker";
+    ViewBag.Area = "Admin";
+}
+<div class="page-header">
+    <h1>
+        Welcome to the BA 272 Assignment Checker!
+    </h1>
+</div>
+
+<div class="list-group" id="results">
+    @foreach(Tuple<int, string> item in Model)
+    {
+        <h4 class="list-group-item-heading">
+        @Html.DisplayFor(m => item.Item2)
+            |
+        @Html.ActionLink("All Assignments", "All", new { id = item.Item1 })
+            |
+        @Html.ActionLink("Valid Assignments", "Valid", new { id = item.Item1 })
+            |
+        @Html.ActionLink("Invalid Assignments", "InValid", new { id = item.Item1 })
+            |
+        </h4>
+    }
+</div>

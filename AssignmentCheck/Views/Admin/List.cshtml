@@ -1,15 +1,12 @@
 ﻿@model AssignmentCheck.Models.AdminViewModel
 @{
     ViewBag.Title = "BA 272 Assignment Checker";
+    ViewBag.Controller = "Admin";
 }
 <div class="page-header">
     <h1>
         Welcome to the BA 272 Assignment Checker!
     </h1>
-</div>
-
-<div class="dropdown">
-    @Html.DropDownList("Results Filter", new SelectList(new List<string>() { "Show Invalid Results Only", "Show All Results" }), new { @onchange = "filter();" }))
 </div>
 
 <div class="list-group" id="results">
